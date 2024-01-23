@@ -1,0 +1,46 @@
+{
+    "name": "fortea",
+    "version": "1.0.0",
+    "description": "some tools for js, save your time for a cup of tea",
+    "main": "index.js",
+    "author": "wongyichen",
+    "homepage": "https://github.com/irychen/fortea",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/irychen/fortea.git"
+    },
+    "files": [
+        "index.js",
+        "index.d.ts"
+    ],
+    "lint-staged": {
+        "src/**/*.{js,ts,tsx}": [
+            "prettier --write"
+        ]
+    },
+    "scripts": {
+        "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+        "test": "jest --watchAll",
+        "build": "rollup --config rollup.config.ts --configPlugin typescript",
+        "prepare": "husky install"
+    },
+    "keywords": [
+        "base64",
+        "delay",
+        "isFunc"
+    ],
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/preset-env": "^7.23.8",
+        "@babel/preset-typescript": "^7.23.3",
+        "@rollup/plugin-babel": "^6.0.4",
+        "@rollup/plugin-typescript": "^11.1.6",
+        "@types/jest": "^29.5.11",
+        "husky": "^8.0.3",
+        "jest": "^29.7.0",
+        "lint-staged": "^15.2.0",
+        "prettier": "3.2.4",
+        "rollup": "^4.9.6",
+        "typescript": "^5.3.3"
+    }
+}

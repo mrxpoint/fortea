@@ -1,6 +1,6 @@
 {
     "name": "fortea",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "some tools for js, save your time for a cup of tea",
     "main": "index.js",
     "author": "wongyichen",

@@ -245,19 +245,32 @@ function isString(value) {
     return typeof value === "string";
 }
 
-function toNumber(value) {
+/**
+ * Convert value to number
+ * @name toNumber
+ * @param value
+ * @param skipFinite if false, infinity will be converted to 0 ，default is false
+ * @return number
+ * @example
+ * toNumber(1) // => 1
+ * toNumber(Infinity) // => 0
+ * toNumber(NaN) // => 0
+ * toNumber(Infinity, true) // => Infinity
+ * toNumber(-0) // => 0
+ */
+function toNumber(value, skipFinite = false) {
     if (value === null || value === undefined)
         return 0;
     if (typeof value === "string") {
         const v = parseFloat(value);
         if (isNegativeZero(v))
             return 0;
-        return isNumber(v) ? v : 0;
+        return isNumber(v, skipFinite) ? v : 0;
     }
     if (typeof value === "number") {
         if (isNegativeZero(value))
             return 0;
-        return isNumber(value) ? value : 0;
+        return isNumber(value, skipFinite) ? value : 0;
     }
     return 0;
 }
@@ -377,6 +390,53 @@ function toPercentage(value, fixed) {
     }
 }
 
+/**
+ * @name skipTake
+ * @description skip take pagination function for prisma orm
+ * @example
+ *    const { skip, take } = skipTake({ page: 2, pageSize: 10 })  // skip: 10, take: 10
+ *
+ *    const { skip, take } = skipTake({ page: 2, pageSize: -1 })  // skip: undefined, take: undefined
+ *
+ *    const { skip, take } = skipTake({ page: 1, pageSize: -1 }, { allowAll: false })  // skip: 0, take: 10  (pageSize = minPageSize || defaultPageSize)
+ */
+function skipTake(pagination, options) {
+    let { page, pageSize } = pagination || {};
+    const { defaultPage = 1, defaultPageSize = 10, maxPageSize, maxPage, minPageSize, minPage, allowAll = true, } = options || {};
+    page = isNil(page) ? defaultPage : toNumber(page, true);
+    pageSize = isNil(pageSize) ? defaultPageSize : toNumber(pageSize, true);
+    if (maxPageSize && pageSize > maxPageSize)
+        pageSize = maxPageSize;
+    if (maxPage && page > maxPage)
+        page = maxPage;
+    if (minPageSize && pageSize < minPageSize)
+        pageSize = minPageSize;
+    if (minPage && page < minPage)
+        page = minPage;
+    if (!Number.isFinite(page))
+        page = defaultPage;
+    if (!Number.isFinite(pageSize))
+        pageSize = defaultPageSize;
+    if (pageSize < 1 && allowAll) {
+        return {
+            skip: undefined,
+            take: undefined,
+            page,
+            pageSize,
+        };
+    }
+    else {
+        if (pageSize < 1)
+            pageSize = minPageSize || defaultPageSize;
+        return {
+            skip: (page - 1) * pageSize,
+            take: pageSize,
+            page,
+            pageSize,
+        };
+    }
+}
+
 const fortea = {
     base64,
     classNames,
@@ -391,9 +451,10 @@ const fortea = {
     map,
     mergePath,
     queryJsonStr,
+    skipTake,
     toBoolean,
     toNumber,
     toPercentage,
 };
 
-export { base64, classNames, fortea as default, delayAsync, isBoolean, isFunc, isInteger, isNil, isNumber, isObject, isString, map, mergePath, queryJsonStr, toBoolean, toNumber, toPercentage };
+export { base64, classNames, fortea as default, delayAsync, isBoolean, isFunc, isInteger, isNil, isNumber, isObject, isString, map, mergePath, queryJsonStr, skipTake, toBoolean, toNumber, toPercentage };

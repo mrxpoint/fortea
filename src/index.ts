@@ -14,6 +14,7 @@ import isBoolean from "./isBoolean"
 import isObject from "./isObject"
 import toBoolean from "./toBoolean"
 import toPercentage from "./toPercentage"
+import skipTake from "./skipTake"
 
 const fortea = {
     base64,
@@ -29,6 +30,7 @@ const fortea = {
     map,
     mergePath,
     queryJsonStr,
+    skipTake,
     toBoolean,
     toNumber,
     toPercentage,
@@ -49,6 +51,7 @@ export {
     map,
     mergePath,
     queryJsonStr,
+    skipTake,
     toBoolean,
     toNumber,
     toPercentage,

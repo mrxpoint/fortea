@@ -36,6 +36,7 @@ library.
         <li>isInteger</li>
         <li>isNil</li>
         <li>isNumber</li>
+        <li>skipTake</li>
     </ul>
   </div>
  <div style="width: 50%;display: inline-block">

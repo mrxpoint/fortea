@@ -73,4 +73,28 @@ describe("toNumber", () => {
     it("test case 23", () => {
         expect(toNumber("1.23h3")).toBe(1.23)
     })
+    // Infinity skipFinite true
+    it("test case 24", () => {
+        expect(toNumber(Infinity, true)).toBe(Infinity)
+    })
+    // Infinity skipFinite false
+    it("test case 25", () => {
+        expect(toNumber(Infinity)).toBe(0)
+    })
+    // -Infinity skipFinite true
+    it("test case 26", () => {
+        expect(toNumber(-Infinity, true)).toBe(-Infinity)
+    })
+    // -Infinity skipFinite false
+    it("test case 27", () => {
+        expect(toNumber(-Infinity)).toBe(0)
+    })
+    // ‘Infinity’ skipFinite true
+    it("test case 28", () => {
+        expect(toNumber("Infinity", true)).toBe(Infinity)
+    })
+    // ‘Infinity’ skipFinite false
+    it("test case 29", () => {
+        expect(toNumber("Infinity")).toBe(0)
+    })
 })

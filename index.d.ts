@@ -73,7 +73,7 @@ declare function isNumber(value: any, skipFinite?: boolean): value is number;
 
 declare function isString(value: any): value is string;
 
-declare function toNumber(value: any): number;
+declare function toNumber(value: any, skipFinite?: boolean): number;
 
 /**
  * @name map
@@ -107,6 +107,30 @@ declare function toBoolean(value: any): boolean;
  */
 declare function toPercentage(value: number, fixed?: number): string;
 
+interface skipTakeOptions {
+    defaultPage?: number
+    defaultPageSize?: number
+    maxPageSize?: number
+    maxPage?: number
+    minPageSize?: number
+    minPage?: number
+    allowAll?: boolean
+}
+
+interface skipTakePagination {
+    page?: number | string
+    pageSize?: number | string
+}
+
+interface skipTakeResult {
+    skip?: number
+    take?: number
+    page: number
+    pageSize: number
+}
+
+declare function skipTake(pagination?: skipTakePagination, options?: skipTakeOptions): skipTakeResult;
+
 declare const fortea: {
     base64: {
         _keyStr: string;
@@ -131,6 +155,7 @@ declare const fortea: {
         forString: typeof forString;
         forBoolean: typeof forBoolean;
     };
+    skipTake: typeof skipTake;
     toBoolean: typeof toBoolean;
     toNumber: typeof toNumber;
     toPercentage: typeof toPercentage;
@@ -150,6 +175,7 @@ export {
     map,
     mergePath,
     queryJsonStr,
+    skipTake,
     toBoolean,
     toNumber,
     toPercentage,

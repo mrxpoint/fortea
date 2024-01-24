@@ -36,4 +36,12 @@ describe("toPercentage", () => {
     it("test case 10", () => {
         expect(toPercentage(1.126, 1)).toEqual("112.6%")
     })
+    // 1.6666666666666666
+    it("test case 11", () => {
+        expect(toPercentage(1.6666666666666666)).toEqual("166.66666666666666%")
+    })
+    // 1.6666666666666666 => 166.7% (fixed = 1)
+    it("test case 12", () => {
+        expect(toPercentage(1.6666666666666666, 1)).toEqual("166.7%")
+    })
 })

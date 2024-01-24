@@ -437,6 +437,50 @@ function skipTake(pagination, options) {
     }
 }
 
+/**
+ * @name isTokenExpired
+ * @description check if token is expired
+ * @param token
+ * @param config
+ *   expireKey: string = "exp"
+ *   expiredTestCall: (exp : number) => boolean = exp => exp < Date.now() / 1000
+ * @returns boolean
+ * @example
+ * import isTokenExpired from "./index"
+ * import * as jwt from "jsonwebtoken"
+ *
+ * const token = jwt.sign({
+ *       id: "123",
+ *    },
+ *    "secret",
+ *    {
+ *    expiresIn: '1s',
+ *    })
+ *
+ * await delayAsync(2)
+ * const isExpired = isTokenExpired(token) // true
+ */
+function isTokenExpired(token, config) {
+    const expireKey = (config === null || config === void 0 ? void 0 : config.expireKey) || "exp";
+    const expiredTestCall = config === null || config === void 0 ? void 0 : config.expiredTestCall;
+    if (!token)
+        return true;
+    const tokenArr = token.split(".");
+    const encodedPayload = tokenArr[1];
+    if (!encodedPayload)
+        return true;
+    const payloadJsonStr = base64.decode(encodedPayload);
+    const exp = queryJsonStr.forNumber(payloadJsonStr, expireKey);
+    if (!exp)
+        return true;
+    if (isFunc(expiredTestCall)) {
+        return expiredTestCall(exp);
+    }
+    else {
+        return exp < Date.now() / 1000;
+    }
+}
+
 const fortea = {
     base64,
     classNames,
@@ -448,6 +492,7 @@ const fortea = {
     isNumber,
     isObject,
     isString,
+    isTokenExpired,
     map,
     mergePath,
     queryJsonStr,
@@ -457,4 +502,4 @@ const fortea = {
     toPercentage,
 };
 
-export { base64, classNames, fortea as default, delayAsync, isBoolean, isFunc, isInteger, isNil, isNumber, isObject, isString, map, mergePath, queryJsonStr, skipTake, toBoolean, toNumber, toPercentage };
+export { base64, classNames, fortea as default, delayAsync, isBoolean, isFunc, isInteger, isNil, isNumber, isObject, isString, isTokenExpired, map, mergePath, queryJsonStr, skipTake, toBoolean, toNumber, toPercentage };

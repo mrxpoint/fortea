@@ -1,8 +1,6 @@
 <p align="center">
-  <img width="180" src="./fortea.png" alt="Vite logo">
+  <img width="180" src="./fortea.png" alt="fortea logo">
 </p>
-
-
 
 <p align="center">A comprehensive TypeScript function library offering a wide range of utilities.</p>
 
@@ -53,17 +51,17 @@ library.
           <a href="https://github.com/irychen/fortea/blob/main/src/isNumber/index.ts">isNumber</a>
         </li>
         <li>
-          <a href="https://github.com/irychen/fortea/blob/main/src/skipTake/index.ts">skipTake</a>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isObject/index.ts">isObject</a>
         </li>
     </ul>
   </div>
  <div style="width: 50%;display: inline-block">
     <ul>
         <li>
-            <a href="https://github.com/irychen/fortea/blob/main/src/isObject/index.ts">isObject</a>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isString/index.ts">isString</a>
         </li>
         <li>
-          <a href="https://github.com/irychen/fortea/blob/main/src/isString/index.ts">isString</a>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isTokenExpired/index.ts">isTokenExpired</a>
         </li>
         <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/map/index.ts">map</a>
@@ -73,6 +71,9 @@ library.
         </li>
         <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/queryJsonStr/index.ts">queryJsonStr</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/skipTake/index.ts">skipTake</a>
         </li>
         <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/toBoolean/index.ts">toBoolean</a>

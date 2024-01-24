@@ -131,6 +131,13 @@ interface skipTakeResult {
 
 declare function skipTake(pagination?: skipTakePagination, options?: skipTakeOptions): skipTakeResult;
 
+interface isTokenExpiredConfig {
+    expireKey?: string,
+    expiredTestCall?: (exp: number) => boolean,
+}
+
+declare function isTokenExpired(token?: string, config?: isTokenExpiredConfig): boolean;
+
 declare const fortea: {
     base64: {
         _keyStr: string;
@@ -148,6 +155,7 @@ declare const fortea: {
     isNumber: typeof isNumber;
     isObject: typeof isObject;
     isString: typeof isString;
+    isTokenExpired: typeof isTokenExpired;
     map: typeof map;
     mergePath: typeof mergePath;
     queryJsonStr: {
@@ -172,6 +180,7 @@ export {
     isNumber,
     isObject,
     isString,
+    isTokenExpired,
     map,
     mergePath,
     queryJsonStr,

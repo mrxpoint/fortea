@@ -7,7 +7,7 @@ import isNil from "../isNil"
  * @returns Promise<void>
  */
 function delayAsync(seconds = 1) {
-    let _timeID: null | number
+    let _timeID: null | number | NodeJS.Timeout
     return new Promise<void>((resolve, _reject) => {
         _timeID = setTimeout(() => {
             resolve()

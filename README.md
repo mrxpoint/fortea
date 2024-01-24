@@ -19,7 +19,7 @@ library.
 
 ## Features
 
-- lightweight, zero dependencies 
+- lightweight, zero dependencies
 - well tested, with huge test coverage
 - easy to use, simple and clear API
 
@@ -28,27 +28,61 @@ library.
 <div style="width: 100%;display: flex">
   <div style="width: 50%;display: inline-block">
     <ul>
-        <li>base64</li>
-        <li>classNames</li>
-        <li>delayAsync</li>
-        <li>isBoolean</li>
-        <li>isFunc</li>
-        <li>isInteger</li>
-        <li>isNil</li>
-        <li>isNumber</li>
-        <li>skipTake</li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/base64/index.ts">base64</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/classNames/index.ts">classNames</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/delayAsync/index.ts">delayAsync</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isBoolean/index.ts">isBoolean</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isFunc/index.ts">isFunc</a>
+        </li>
+        <li>
+          <a  href="https://github.com/irychen/fortea/blob/main/src/isInteger/index.ts">isInteger</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isNil/index.ts">isNil</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isNumber/index.ts">isNumber</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/skipTake/index.ts">skipTake</a>
+        </li>
     </ul>
   </div>
  <div style="width: 50%;display: inline-block">
     <ul>
-        <li>isObject</li>
-        <li>isString</li>
-        <li>map</li>
-        <li>mergePath</li>
-        <li>queryJsonStr</li>
-        <li>toBoolean</li>
-        <li>toNumber</li>
-        <li>toPercentage</li>
+        <li>
+            <a href="https://github.com/irychen/fortea/blob/main/src/isObject/index.ts">isObject</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isString/index.ts">isString</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/map/index.ts">map</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/mergePath/index.ts">mergePath</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/queryJsonStr/index.ts">queryJsonStr</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/toBoolean/index.ts">toBoolean</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/toNumber/index.ts">toNumber</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/toPercentage/index.ts">toPercentage</a>
+        </li>
     </ul>
   </div>
 </div>

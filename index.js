@@ -182,10 +182,10 @@ function isNil(value) {
 }
 
 /**
- * @name delayAsync
- * @description 异步延迟执行函数 Promise 封装
- * @param seconds 延迟秒数
- * @returns Promise<void>
+ * Creates a promise that resolves after a specified number of seconds.
+ *
+ * @param {number} [seconds=1] - The number of seconds to delay before resolving the promise.
+ * @returns {Promise<void>} A promise that resolves after the specified delay.
  */
 function delayAsync(seconds = 1) {
     let _timeID;
@@ -199,6 +199,12 @@ function delayAsync(seconds = 1) {
     });
 }
 
+/**
+ * @name classNames
+ * @description generate class names
+ * @param args
+ * @returns string
+ */
 function classNames(...args) {
     const classes = [];
     for (let i = 0; i < args.length; i++) {
@@ -481,7 +487,45 @@ function isTokenExpired(token, config) {
     }
 }
 
+/**
+ * Inserts an item into an array or updates an existing item. If a key is provided, it uses the key to find an existing item.
+ * Otherwise, it uses a comparison function. the default comparison function is (a,b) => a === b，if all can't find an existing item, it simply adds the item to the end of the array.
+ * @name arrayUpsert
+ * @template T - The type of elements in the array.
+ * @param {T[]} target - The array to upsert into.
+ * @param {T} item - The item to insert or update in the array.
+ * @param {keyof T} [compareKey] - The property name to identify the item. If provided, items are compared based on this property.
+ * @param {(targetItem: T, item: T) => boolean} [compare] - A comparison function to determine if the item exists in the array. default compare (a,b) => a === b  (optional)
+ * @param {boolean} [returnOriginal] - Flag to return the original array or a copy of the array after the upsert operation. Defaults to false.(optional)
+ * @returns {T[]} The array after the upsert operation.
+ */
+function arrayUpsert(target, item, compareKey, compare, returnOriginal) {
+    const result = returnOriginal ? target : [...target];
+    const updateOrInsert = (index) => {
+        if (index > -1) {
+            result[index] = item;
+        }
+        else {
+            result.push(item);
+        }
+    };
+    let index = -1;
+    if (!isNil(compareKey)) {
+        index = result.findIndex(i => i[compareKey] === item[compareKey]);
+    }
+    else if (isFunc(compare)) {
+        index = result.findIndex(targetItem => compare(targetItem, item));
+    }
+    else {
+        // default  (a,b) => a === b
+        index = result.findIndex(targetItem => targetItem === item);
+    }
+    updateOrInsert(index);
+    return result;
+}
+
 const fortea = {
+    arrayUpsert,
     base64,
     classNames,
     delayAsync,
@@ -502,4 +546,4 @@ const fortea = {
     toPercentage,
 };
 
-export { base64, classNames, fortea as default, delayAsync, isBoolean, isFunc, isInteger, isNil, isNumber, isObject, isString, isTokenExpired, map, mergePath, queryJsonStr, skipTake, toBoolean, toNumber, toPercentage };
+export { arrayUpsert, base64, classNames, fortea as default, delayAsync, isBoolean, isFunc, isInteger, isNil, isNumber, isObject, isString, isTokenExpired, map, mergePath, queryJsonStr, skipTake, toBoolean, toNumber, toPercentage };

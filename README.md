@@ -27,6 +27,9 @@ library.
   <div style="width: 50%;display: inline-block">
     <ul>
         <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/arrayUpsert/index.ts">arrayUpsert</a>
+        </li>
+        <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/base64/index.ts">base64</a>
         </li>
         <li>

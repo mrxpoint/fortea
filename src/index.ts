@@ -16,8 +16,10 @@ import toBoolean from "./toBoolean"
 import toPercentage from "./toPercentage"
 import skipTake from "./skipTake"
 import isTokenExpired from "./isTokenExpired"
+import arrayUpsert from "./arrayUpsert"
 
 const fortea = {
+    arrayUpsert,
     base64,
     classNames,
     delayAsync,
@@ -40,6 +42,7 @@ const fortea = {
 
 export {
     fortea as default,
+    arrayUpsert,
     base64,
     classNames,
     delayAsync,

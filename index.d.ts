@@ -45,13 +45,20 @@ declare const base64: {
 }
 export  type ClassNameItem = string | number | Record<string, boolean> | ClassNameItem[];
 
+
+/**
+ * @name classNames
+ * @description generate class names
+ * @param args
+ * @returns string
+ */
 declare function classNames(...args: ClassNameItem[]): string;
 
 /**
- * @name delayAsync
- * @description 异步延迟执行函数 Promise 封装
- * @param seconds 延迟秒数
- * @returns Promise<void>
+ * Creates a promise that resolves after a specified number of seconds.
+ *
+ * @param {number} [seconds=1] - The number of seconds to delay before resolving the promise.
+ * @returns {Promise<void>} A promise that resolves after the specified delay.
  */
 declare function delayAsync(seconds: number): Promise<void>;
 
@@ -128,7 +135,16 @@ interface skipTakeResult {
     page: number
     pageSize: number
 }
-
+/**
+ * @name skipTake
+ * @description skip take pagination function for prisma orm
+ * @example
+ *    const { skip, take } = skipTake({ page: 2, pageSize: 10 })  // skip: 10, take: 10
+ *
+ *    const { skip, take } = skipTake({ page: 2, pageSize: -1 })  // skip: undefined, take: undefined
+ *
+ *    const { skip, take } = skipTake({ page: 1, pageSize: -1 }, { allowAll: false })  // skip: 0, take: 10  (pageSize = minPageSize || defaultPageSize)
+ */
 declare function skipTake(pagination?: skipTakePagination, options?: skipTakeOptions): skipTakeResult;
 
 interface isTokenExpiredConfig {
@@ -136,7 +152,50 @@ interface isTokenExpiredConfig {
     expiredTestCall?: (exp: number) => boolean,
 }
 
+/**
+ * @name isTokenExpired
+ * @description check if token is expired
+ * @param token
+ * @param config
+ *   expireKey: string = "exp"
+ *   expiredTestCall: (exp : number) => boolean = exp => exp < Date.now() / 1000
+ * @returns boolean
+ * @example
+ * import isTokenExpired from "./index"
+ * import * as jwt from "jsonwebtoken"
+ *
+ * const token = jwt.sign({
+ *       id: "123",
+ *    },
+ *    "secret",
+ *    {
+ *    expiresIn: '1s',
+ *    })
+ *
+ * await delayAsync(2)
+ * const isExpired = isTokenExpired(token) // true
+ */
 declare function isTokenExpired(token?: string, config?: isTokenExpiredConfig): boolean;
+
+/**
+ * Inserts an item into an array or updates an existing item. If a key is provided, it uses the key to find an existing item.
+ * Otherwise, it uses a comparison function. the default comparison function is (a,b) => a === b，if all can't find an existing item, it simply adds the item to the end of the array.
+ * @name arrayUpsert
+ * @template T - The type of elements in the array.
+ * @param {T[]} target - The array to upsert into.
+ * @param {T} item - The item to insert or update in the array.
+ * @param {keyof T} [compareKey] - The property name to identify the item. If provided, items are compared based on this property.
+ * @param {(targetItem: T, item: T) => boolean} [compare] - A comparison function to determine if the item exists in the array. default compare (a,b) => a === b  (optional)
+ * @param {boolean} [returnOriginal] - Flag to return the original array or a copy of the array after the upsert operation. Defaults to false.(optional)
+ * @returns {T[]} The array after the upsert operation.
+ */
+declare function arrayUpsert<T>(
+    target: T[],
+    item: T,
+    compareKey?: keyof T,
+    compare?: (targetItem: T, item: T) => boolean,
+    returnOriginal?: boolean,
+): T[];
 
 declare const fortea: {
     base64: {
@@ -146,6 +205,7 @@ declare const fortea: {
         _utf8_encode: (text: string) => string;
         _utf8_decode: (utf8text: string) => string;
     };
+    arrayUpsert : typeof arrayUpsert;
     classNames: typeof classNames;
     delayAsync: typeof delayAsync;
     isBoolean: typeof isBoolean;
@@ -170,6 +230,7 @@ declare const fortea: {
 }
 export {
     fortea as default,
+    arrayUpsert,
     base64,
     classNames,
     delayAsync,

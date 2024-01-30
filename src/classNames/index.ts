@@ -1,5 +1,11 @@
 type classNameItem = string | Record<string, boolean>
 
+/**
+ * @name classNames
+ * @description generate class names
+ * @param args
+ * @returns string
+ */
 function classNames(...args: classNameItem[]): string {
     const classes = []
     for (let i = 0; i < args.length; i++) {

@@ -1,12 +1,12 @@
 import isNil from "../isNil"
 
 /**
- * @name delayAsync
- * @description 异步延迟执行函数 Promise 封装
- * @param seconds 延迟秒数
- * @returns Promise<void>
+ * Creates a promise that resolves after a specified number of seconds.
+ *
+ * @param {number} [seconds=1] - The number of seconds to delay before resolving the promise.
+ * @returns {Promise<void>} A promise that resolves after the specified delay.
  */
-function delayAsync(seconds = 1) {
+function delayAsync(seconds: number = 1): Promise<void> {
     let _timeID: null | number | NodeJS.Timeout
     return new Promise<void>((resolve, _reject) => {
         _timeID = setTimeout(() => {

@@ -39,7 +39,13 @@ library.
           <a href="https://github.com/irychen/fortea/blob/main/src/delayAsync/index.ts">delayAsync</a>
         </li>
         <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isArray/index.ts">isArray</a>
+        </li>
+        <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/isBoolean/index.ts">isBoolean</a>
+        </li>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isEmpty/index.ts">isEmpty</a>
         </li>
         <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/isFunc/index.ts">isFunc</a>
@@ -50,16 +56,16 @@ library.
         <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/isNil/index.ts">isNil</a>
         </li>
-        <li>
+       <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/isNumber/index.ts">isNumber</a>
-        </li>
-        <li>
-          <a href="https://github.com/irychen/fortea/blob/main/src/isObject/index.ts">isObject</a>
         </li>
     </ul>
   </div>
  <div style="width: 50%;display: inline-block">
     <ul>
+        <li>
+          <a href="https://github.com/irychen/fortea/blob/main/src/isObject/index.ts">isObject</a>
+        </li>
         <li>
           <a href="https://github.com/irychen/fortea/blob/main/src/isString/index.ts">isString</a>
         </li>

@@ -20,4 +20,16 @@ describe("isInteger", () => {
     it("test case 6", () => {
         expect(isInteger(5.0000000000000001)).toEqual(true)
     })
+    // Infinity
+    it("test case 7", () => {
+        expect(isInteger(Infinity)).toEqual(false)
+    })
+    // NaN
+    it("test case 8", () => {
+        expect(isInteger(NaN)).toEqual(false)
+    })
+    // -Infinity
+    it("test case 9", () => {
+        expect(isInteger(-Infinity)).toEqual(false)
+    })
 })

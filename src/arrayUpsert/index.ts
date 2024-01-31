@@ -1,5 +1,6 @@
 import isFunc from "../isFunc"
 import isNil from "../isNil"
+import isObject from "../isObject"
 
 /**
  * Inserts an item into an array or updates an existing item. If a key is provided, it uses the key to find an existing item.
@@ -11,6 +12,7 @@ import isNil from "../isNil"
  * @param {keyof T} [compareKey] - The property name to identify the item. If provided, items are compared based on this property.
  * @param {(targetItem: T, item: T) => boolean} [compare] - A comparison function to determine if the item exists in the array. default compare (a,b) => a === b  (optional)
  * @param {boolean} [returnOriginal] - Flag to return the original array or a copy of the array after the upsert operation. Defaults to false.(optional)
+ * @param merge - Flag to merge the item with the existing item. Defaults to false.(optional)
  * @returns {T[]} The array after the upsert operation.
  */
 function arrayUpsert<T>(
@@ -19,17 +21,26 @@ function arrayUpsert<T>(
     compareKey?: keyof T,
     compare?: (targetItem: T, item: T) => boolean,
     returnOriginal?: boolean,
+    merge?: boolean,
 ): T[] {
     const result = returnOriginal ? target : [...target]
 
     const updateOrInsert = (index: number) => {
         if (index > -1) {
-            result[index] = item
+            const targetItem = result[index]
+            if (merge && isObject(targetItem) && isObject(item)) {
+                result[index] = {
+                    ...targetItem,
+                    ...item,
+                }
+            } else {
+                result[index] = item
+            }
         } else {
             result.push(item)
         }
     }
-    let index = -1
+    let index: number
     if (!isNil(compareKey)) {
         index = result.findIndex(i => i[compareKey] === item[compareKey])
     } else if (isFunc(compare)) {

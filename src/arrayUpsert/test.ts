@@ -82,4 +82,32 @@ describe("arrayUpsert", () => {
         ]
         expect(arrayUpsert(arr, obj, undefined, (a, b) => a.id === b.id)).toEqual(expectArr)
     })
+    it("test case 9", () => {
+        const arr = [
+            { uid: "1", id: "_1", name: "a", c: "c" },
+            { uid: "2", id: "_2", name: "b", c: "c" },
+            { uid: "3", id: "_3", name: "c", c: "c" },
+        ]
+        const obj = { uid: "3", id: "_3", c: "xx" }
+        const expectArr = [
+            { uid: "1", id: "_1", name: "a", c: "c" },
+            { uid: "2", id: "_2", name: "b", c: "c" },
+            { uid: "3", id: "_3", name: "c", c: "xx" },
+        ]
+        expect(arrayUpsert(arr, obj, "id", undefined, false, true)).toEqual(expectArr)
+    })
+    it("test case 10", () => {
+        const arr = [
+            { uid: "1", id: "_1", name: "a", c: "c" },
+            { uid: "2", id: "_2", name: "b", c: "c" },
+            { uid: "3", id: "_3", name: "c", c: "c" },
+        ]
+        const obj = { uid: "3", id: "_3", c: "xx" }
+        const expectArr = [
+            { uid: "1", id: "_1", name: "a", c: "c" },
+            { uid: "2", id: "_2", name: "b", c: "c" },
+            { uid: "3", id: "_3", c: "xx" },
+        ]
+        expect(arrayUpsert(arr, obj, "id")).toEqual(expectArr)
+    })
 })

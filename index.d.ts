@@ -62,6 +62,16 @@ declare function classNames(...args: ClassNameItem[]): string;
  */
 declare function delayAsync(seconds: number): Promise<void>;
 
+/**
+ * Check if value is null or undefined
+ * @name isNil
+ * @param value value to check
+ * @returns {boolean} true if value is null or undefined
+ * @example
+ * isNil(null) // => true
+ * isNil(undefined) // => true
+ * isNil(1) // => false
+ */
 declare function isNil(value: any): value is null | undefined  ;
 
 /**
@@ -93,8 +103,17 @@ declare function toNumber(value: any, skipFinite?: boolean): number;
 declare function map<Input, Output>(arr: Input[], func: (item: Input, index: number) => Output, skipNil?: boolean): Output[];
 
 declare function mergePath(paterPath?: string, path?: string): string;
-
-declare function isInteger(value: any): boolean;
+/**
+ * Check if value is integer
+ * @name isInteger
+ * @param value value to check
+ * @returns {boolean} true if value is integer
+ * @example
+ * isInteger(1) // => true
+ * isInteger(1.1) // => false
+ * isInteger(Infinity) // => false
+ */
+declare function isInteger(value: number): boolean;
 
 declare function isFunc(value: any): value is Function;
 
@@ -140,9 +159,7 @@ interface skipTakeResult {
  * @description skip take pagination function for prisma orm
  * @example
  *    const { skip, take } = skipTake({ page: 2, pageSize: 10 })  // skip: 10, take: 10
- *
  *    const { skip, take } = skipTake({ page: 2, pageSize: -1 })  // skip: undefined, take: undefined
- *
  *    const { skip, take } = skipTake({ page: 1, pageSize: -1 }, { allowAll: false })  // skip: 0, take: 10  (pageSize = minPageSize || defaultPageSize)
  */
 declare function skipTake(pagination?: skipTakePagination, options?: skipTakeOptions): skipTakeResult;
@@ -187,6 +204,7 @@ declare function isTokenExpired(token?: string, config?: isTokenExpiredConfig): 
  * @param {keyof T} [compareKey] - The property name to identify the item. If provided, items are compared based on this property.
  * @param {(targetItem: T, item: T) => boolean} [compare] - A comparison function to determine if the item exists in the array. default compare (a,b) => a === b  (optional)
  * @param {boolean} [returnOriginal] - Flag to return the original array or a copy of the array after the upsert operation. Defaults to false.(optional)
+ * @param merge - Flag to merge the item with the existing item. Defaults to false.(optional)
  * @returns {T[]} The array after the upsert operation.
  */
 declare function arrayUpsert<T>(
@@ -195,7 +213,33 @@ declare function arrayUpsert<T>(
     compareKey?: keyof T,
     compare?: (targetItem: T, item: T) => boolean,
     returnOriginal?: boolean,
+    merge?: boolean
 ): T[];
+
+/**
+ * check if value is array
+ * @param value
+ * @returns {boolean} true if value is array
+ * @example
+ * isArray([]) // => true
+ */
+declare function isArray(value: any): boolean;
+
+/**
+ * @name isEmpty
+ * @description check if value is empty
+ * @param value
+ * @returns {boolean} true if value is empty
+ * @example
+ * isEmpty(null) // => true
+ * isEmpty(undefined) // => true
+ * isEmpty(1) // => false
+ * isEmpty('') // => true
+ * isEmpty(' ') // => false
+ * isEmpty([]) // => true
+ * isEmpty({}) // => true
+ */
+declare function isEmpty(value: any): boolean;
 
 declare const fortea: {
     base64: {
@@ -208,7 +252,9 @@ declare const fortea: {
     arrayUpsert : typeof arrayUpsert;
     classNames: typeof classNames;
     delayAsync: typeof delayAsync;
+    isArray: typeof isArray;
     isBoolean: typeof isBoolean;
+    isEmpty: typeof isEmpty;
     isFunc: typeof isFunc;
     isInteger: typeof isInteger;
     isNil: typeof isNil;
@@ -234,7 +280,9 @@ export {
     base64,
     classNames,
     delayAsync,
+    isArray,
     isBoolean,
+    isEmpty,
     isFunc,
     isInteger,
     isNil,

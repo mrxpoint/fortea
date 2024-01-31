@@ -177,6 +177,16 @@ const base64 = {
     },
 };
 
+/**
+ * Check if value is null or undefined
+ * @name isNil
+ * @param value value to check
+ * @returns {boolean} true if value is null or undefined
+ * @example
+ * isNil(null) // => true
+ * isNil(undefined) // => true
+ * isNil(1) // => false
+ */
 function isNil(value) {
     return value === null || value === undefined;
 }
@@ -317,8 +327,21 @@ function mergePath(paterPath = "", path = "") {
     return paterPath + "/" + path;
 }
 
+/**
+ * Check if value is integer
+ * @name isInteger
+ * @param value value to check
+ * @returns {boolean} true if value is integer
+ * @example
+ * isInteger(1) // => true
+ * isInteger(1.1) // => false
+ * isInteger(Infinity) // => false
+ */
 function isInteger(value) {
-    return toNumber(value) % 1 === 0;
+    const testCall = Number.isInteger || function (value) {
+        return typeof value === "number" && isFinite(value) && Math.floor(value) === value;
+    };
+    return testCall(value);
 }
 
 function isFunc(value) {
@@ -497,19 +520,26 @@ function isTokenExpired(token, config) {
  * @param {keyof T} [compareKey] - The property name to identify the item. If provided, items are compared based on this property.
  * @param {(targetItem: T, item: T) => boolean} [compare] - A comparison function to determine if the item exists in the array. default compare (a,b) => a === b  (optional)
  * @param {boolean} [returnOriginal] - Flag to return the original array or a copy of the array after the upsert operation. Defaults to false.(optional)
+ * @param merge - Flag to merge the item with the existing item. Defaults to false.(optional)
  * @returns {T[]} The array after the upsert operation.
  */
-function arrayUpsert(target, item, compareKey, compare, returnOriginal) {
+function arrayUpsert(target, item, compareKey, compare, returnOriginal, merge) {
     const result = returnOriginal ? target : [...target];
     const updateOrInsert = (index) => {
         if (index > -1) {
-            result[index] = item;
+            const targetItem = result[index];
+            if (merge && isObject(targetItem) && isObject(item)) {
+                result[index] = Object.assign(Object.assign({}, targetItem), item);
+            }
+            else {
+                result[index] = item;
+            }
         }
         else {
             result.push(item);
         }
     };
-    let index = -1;
+    let index;
     if (!isNil(compareKey)) {
         index = result.findIndex(i => i[compareKey] === item[compareKey]);
     }
@@ -524,12 +554,55 @@ function arrayUpsert(target, item, compareKey, compare, returnOriginal) {
     return result;
 }
 
+/**
+ * check if value is array
+ * @param value
+ * @returns {boolean} true if value is array
+ * @example
+ * isArray([]) // => true
+ */
+function isArray(value) {
+    return Array.isArray(value);
+}
+
+/**
+ * @name isEmpty
+ * @description check if value is empty
+ * @param value
+ * @returns {boolean} true if value is empty
+ * @example
+ * isEmpty(null) // => true
+ * isEmpty(undefined) // => true
+ * isEmpty(1) // => false
+ * isEmpty('') // => true
+ * isEmpty(' ') // => false
+ * isEmpty([]) // => true
+ * isEmpty({}) // => true
+ */
+function isEmpty(value) {
+    if (isNil(value)) {
+        return true;
+    }
+    if (isString(value)) {
+        return value.trim().length === 0;
+    }
+    if (isArray(value)) {
+        return value.length === 0;
+    }
+    if (isObject(value)) {
+        return Object.keys(value).length === 0;
+    }
+    return false;
+}
+
 const fortea = {
     arrayUpsert,
     base64,
     classNames,
     delayAsync,
+    isArray,
     isBoolean,
+    isEmpty,
     isFunc,
     isInteger,
     isNil,
@@ -546,4 +619,4 @@ const fortea = {
     toPercentage,
 };
 
-export { arrayUpsert, base64, classNames, fortea as default, delayAsync, isBoolean, isFunc, isInteger, isNil, isNumber, isObject, isString, isTokenExpired, map, mergePath, queryJsonStr, skipTake, toBoolean, toNumber, toPercentage };
+export { arrayUpsert, base64, classNames, fortea as default, delayAsync, isArray, isBoolean, isEmpty, isFunc, isInteger, isNil, isNumber, isObject, isString, isTokenExpired, map, mergePath, queryJsonStr, skipTake, toBoolean, toNumber, toPercentage };

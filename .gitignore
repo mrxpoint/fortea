@@ -30,3 +30,5 @@ stats.html
 pnpm-lock.yaml
 
 *.backup
+
+coverage

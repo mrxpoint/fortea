@@ -9,10 +9,15 @@ describe("classNames", () => {
     })
     it("test case 3", () => {
         expect(
-            classNames("a", "b", {
-                c: true,
-                d: false,
-            }),
-        ).toBe("a b c")
+            classNames(
+                "a",
+                "b",
+                {
+                    c: true,
+                    d: false,
+                },
+                ["e", "f"],
+            ),
+        ).toBe("a b c e f")
     })
 })

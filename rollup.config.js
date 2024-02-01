@@ -1,12 +1,11 @@
-import type { RollupOptions } from "rollup"
 import babel from "@rollup/plugin-babel"
 import typescript from "@rollup/plugin-typescript"
 
-const config: RollupOptions[] = [
+const config = [
     {
         input: "src/index.ts",
         output: {
-            file: "index.js",
+            file: "dist/esm/index.js",
             exports: "named",
             format: "esm",
         },
@@ -18,6 +17,21 @@ const config: RollupOptions[] = [
             typescript(),
         ],
     },
+    {
+        input: "src/index.ts",
+        output: {
+            file: "dist/cjs/index.js",
+            exports: "named",
+            format: "cjs",
+        },
+        plugins: [
+            babel({
+                babelHelpers: "bundled",
+                exclude: "node_modules/**",
+            }),
+            typescript(),
+        ],
+    }
 ]
 
 export default config

@@ -1,5 +1,6 @@
-type classNameItem = string | Record<string, boolean>
+import isArray from "../isArray"
 
+type classNameItem = string | Record<string, boolean> | classNameItem[]
 /**
  * @name classNames
  * @description generate class names
@@ -14,7 +15,7 @@ function classNames(...args: classNameItem[]): string {
         const argType = typeof arg
         if (argType === "string" || argType === "number") {
             classes.push(arg)
-        } else if (Array.isArray(arg)) {
+        } else if (isArray(arg)) {
             classes.push(classNames(...arg))
         } else if (argType === "object") {
             for (const key in arg as Record<string, boolean>) {

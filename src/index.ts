@@ -19,6 +19,7 @@ import isTokenExpired from "./isTokenExpired"
 import arrayUpsert from "./arrayUpsert"
 import isArray from "./isArray"
 import isEmpty from "./isEmpty"
+import isClient from "./isClient"
 
 const fortea = {
     arrayUpsert,
@@ -27,6 +28,7 @@ const fortea = {
     delayAsync,
     isArray,
     isBoolean,
+    isClient,
     isEmpty,
     isFunc,
     isInteger,
@@ -52,6 +54,7 @@ export {
     delayAsync,
     isArray,
     isBoolean,
+    isClient,
     isEmpty,
     isFunc,
     isInteger,

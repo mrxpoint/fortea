@@ -5,11 +5,10 @@
             "dom"
         ],
         "moduleResolution": "node",
-        "target": "es2016"
+        "target": "es2015"
     },
     "include": [
-        "src/**/*",
-        "index.d.ts",
-        "rollup.config.ts"
-    ]
+        "src/**/*"
+    ],
+    "exclude": ["node_modules", "dist"]
 }

@@ -9,12 +9,7 @@
  * isInteger(Infinity) // => false
  */
 function isInteger(value: number): boolean {
-    const testCall =
-        Number.isInteger ||
-        function (value: number) {
-            return typeof value === "number" && isFinite(value) && Math.floor(value) === value
-        }
-    return testCall(value)
+    return typeof value === "number" && isFinite(value) && Math.floor(value) === value
 }
 
 export default isInteger

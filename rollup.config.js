@@ -5,7 +5,7 @@ const config = [
     {
         input: "src/index.ts",
         output: {
-            file: "dist/esm/index.js",
+            file: "dist/esm/index.mjs",
             exports: "named",
             format: "esm",
         },
@@ -20,7 +20,7 @@ const config = [
     {
         input: "src/index.ts",
         output: {
-            file: "dist/cjs/index.js",
+            file: "dist/cjs/index.cjs",
             exports: "named",
             format: "cjs",
         },

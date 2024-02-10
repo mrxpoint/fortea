@@ -1,6 +1,6 @@
 {
     "name": "fortea",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "some tools for js, save your time for a cup of tea",
     "main": "dist/cjs/index.cjs",
     "module": "dist/esm/index.mjs",
@@ -14,7 +14,8 @@
     "files": [
         "dist/types/index.d.ts",
         "dist/esm/index.mjs",
-        "dist/cjs/index.cjs"
+        "dist/cjs/index.cjs",
+        "dist/types/**/*.d.ts"
     ],
     "lint-staged": {
         "src/**/*.{js,ts,tsx}": [

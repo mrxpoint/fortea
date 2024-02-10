@@ -22,7 +22,7 @@ async function main(){
         if(answer === "y"){
             console.log("Start to release...")
             // install dependencies
-            execSync("npm install")
+            execSync("pnpm install")
             execSync("npm run build")
             execSync("git add .")
             execSync(`git commit -m "release: ${newVersion}"`)

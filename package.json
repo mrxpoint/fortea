@@ -1,6 +1,6 @@
 {
     "name": "fortea",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "some tools for js, save your time for a cup of tea",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
@@ -12,8 +12,9 @@
         "url": "git+https://github.com/irychen/fortea.git"
     },
     "files": [
-        "index.js",
-        "index.d.ts"
+        "dist/types/index.d.ts",
+        "dist/esm/index.js",
+        "dist/cjs/index.js"
     ],
     "lint-staged": {
         "src/**/*.{js,ts,tsx}": [
